@@ -20,6 +20,15 @@ statusCode.font = Font.systemFont(14);
 const statusLabel = widget.addText(`Label: ${res.statuscode_label}`);
 statusLabel.font = Font.systemFont(14);
 
+// Statusgruppeninformationen hinzufügen, wenn Widget größer ist
+if (config.widgetFamily === 'medium' || config.widgetFamily === 'large') {
+    const statusGroup = widget.addText(`Statusgruppe: ${res.statusGroupInfo.statusGroup_name}`);
+    statusGroup.font = Font.systemFont(12);
+
+    const statusGroupRange = widget.addText(`Bereich: ${res.statusGroupInfo.statusGroup_range_from}-${res.statusGroupInfo.statusGroup_range_to}`);
+    statusGroupRange.font = Font.systemFont(12);
+}
+
 // Abstand hinzufügen
 widget.addSpacer(5);
 
@@ -28,6 +37,9 @@ const specLink = widget.addText(`Spezifikation: ${res.statusCode_spezification_l
 specLink.font = Font.systemFont(12);
 specLink.textColor = Color.blue();
 specLink.url = res.statusCode_spezification_link;
+
+// Link zum Öffnen bei Klick hinzufügen
+widget.url = res.infoLink;
 
 // Weitere Formatierung und Layout-Optionen
 widget.backgroundColor = new Color("#000");
